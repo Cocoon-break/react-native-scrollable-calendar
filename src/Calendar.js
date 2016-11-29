@@ -94,7 +94,7 @@ export default class Calendar extends React.Component {
         this.selectFrom = selectFrom;
         this.selectTo = selectTo;
         const months = this.generateMonths(monthsCount, startDate);
-        this.state = {months, currentPage: 0}
+        this.state = {months:months.reverse(), currentPage: 0}
     }
 
     generateMonths(count, startDate) {
@@ -201,7 +201,7 @@ export default class Calendar extends React.Component {
         }
         this.props.onSelectionChange(value, this.prevValue);
         this.prevValue = value;
-        this.setState({months})
+        this.setState({months:months.reverse()})
     }
 
     getStatus(date, selectFrom, selectTo) {
@@ -238,27 +238,27 @@ export default class Calendar extends React.Component {
 
     render() {
         const {months}=this.state
-        return <View style={{marginTop:100}}>
-            <ScrollView
-                style={styles.listViewContainer}
-                ref={(c)=>this.scrollView=c}
-                pagingEnabled={true}
-                horizontal={true}>
-                {months.map((month, idx)=> {
-                    return <Month
-                        key={idx}
-                        {...this.props}
-                        changeSelection={this.changeSelection}
-                        days={month}/>
-                })}
-            </ScrollView>
-        </View>
+        return <ScrollView
+            style={styles.listViewContainer}
+            ref={(c)=>this.scrollView=c}
+            showsHorizontalScrollIndicator = {false}
+            showsVerticalScrollIndicator = {false}
+            pagingEnabled={true}
+            horizontal={true}>
+            {months.map((month, idx)=> {
+                return <Month
+                    key={idx}
+                    {...this.props}
+                    changeSelection={this.changeSelection}
+                    days={month}/>
+            })}
+        </ScrollView>
     }
 }
 
 const styles = StyleSheet.create({
     listViewContainer: {
-        backgroundColor: 'white',
+        //backgroundColor: 'white',
         alignSelf: 'center',
     },
     horizontal: {
