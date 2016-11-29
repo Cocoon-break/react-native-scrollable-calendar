@@ -1,0 +1,23 @@
+{
+  "name": "react-native-scrollable-calendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cocoon-break/react-native-scrollable-calendar.git"
+  },
+  "keywords": [
+    "react-native",
+    "calendar"
+  ],
+  "author": "cocoon-break",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cocoon-break/react-native-scrollable-calendar/issues"
+  },
+  "homepage": "https://github.com/Cocoon-break/react-native-scrollable-calendar#readme"
+}
