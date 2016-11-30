@@ -89,12 +89,12 @@ export default class Calendar extends React.Component {
         super(props);
         this.changeSelection = this.changeSelection.bind(this);
         this.generateMonths = this.generateMonths.bind(this);
-        this._preOrNext = this._preOrNext.bind(this);
+        this.preOrNext = this.preOrNext.bind(this);
         let {selectFrom, selectTo, monthsCount, startDate} = this.props;
         this.selectFrom = selectFrom;
         this.selectTo = selectTo;
         const months = this.generateMonths(monthsCount, startDate);
-        this.state = {months:months.reverse(), currentPage: 0}
+        this.state = {months: months.reverse(), currentPage: 0}
     }
 
     generateMonths(count, startDate) {
@@ -163,7 +163,7 @@ export default class Calendar extends React.Component {
 
     changeSelection(value) {
 
-        if(this.props.onSelectionChange){
+        if (this.props.onSelectionChange) {
             this.props.onSelectionChange(value, this.prevValue);
             return
         }
@@ -201,7 +201,7 @@ export default class Calendar extends React.Component {
         }
         this.props.onSelectionChange(value, this.prevValue);
         this.prevValue = value;
-        this.setState({months:months.reverse()})
+        this.setState({months: months.reverse()})
     }
 
     getStatus(date, selectFrom, selectTo) {
@@ -230,19 +230,22 @@ export default class Calendar extends React.Component {
         this.setState({currentPage})
     }
 
-    _preOrNext(isPre = false) {
+    preOrNext(isPre = false) {
         const currentPage = this.state.currentPage
-        const page = isPre ? currentPage - 1 : currentPage + 1
-        this._changPage(page)
+        let page = isPre ? currentPage - 1 : currentPage + 1
+        if (page >= 0 && page <= this.props.monthsCount-1) {
+            this._changPage(page)
+        }
     }
 
     render() {
         const {months}=this.state
         return <ScrollView
+            onLayout={(e)=>console.log(e.nativeEvent)}
             style={styles.listViewContainer}
             ref={(c)=>this.scrollView=c}
-            showsHorizontalScrollIndicator = {false}
-            showsVerticalScrollIndicator = {false}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
             pagingEnabled={true}
             horizontal={true}>
             {months.map((month, idx)=> {
