@@ -40,7 +40,7 @@ export default class Month extends React.Component {
                             <View key={i}
                                   style={[styles.weekDay, {
 									borderColor: headerSepColor,
-									width: width / 7,
+									width: width / 7-1,
 									height: width / 7
 								}]}>
                                 <Text style={{color: bodyTextColor}}>{dayName}</Text>
